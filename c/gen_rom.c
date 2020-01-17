@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
    for(i = 0; i < N_SAMPLES; i++) {
      double rev_i = (i & ~0x1f) | (31-(i&0x1f)); // go from 31 to 0, not 0-31
      double phase = 2*M_PI*rev_i/N_SAMPLES;
-     double f = (sin(phase)*0.336+0.5) * 65536 * 65536;
+     double f = ((sin(phase)+1.0)*0.166) * 65536 * 65536;
      uint32_t v = f;
      if(i%32 == 0) {
        printf("     \"");
@@ -41,5 +41,4 @@ int main(int argc, char *argv[]) {
      }
      a += v;
    }
-   fprintf(stderr, "A is %08x\n",a);
 }
